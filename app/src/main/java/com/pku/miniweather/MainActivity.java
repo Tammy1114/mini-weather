@@ -37,8 +37,8 @@ import org.xmlpull.v1.XmlPullParserFactory;
 public class MainActivity extends Activity implements View.OnClickListener{
     //private static final int UPDATE_TODAY_WEATHER = 1;
     private ImageView mUpdateBtn;
-    //private TextView cityTv, timeTv, humidityTv, weekTv, pmDataTv, pmQualityTv, temperatureTv, climateTv, windTv, city_name_Tv;
-    //private ImageView weatherImg, pmImg;
+    private TextView cityTv, timeTv, humidityTv, weekTv, pmDataTv, pmQualityTv, temperatureTv, climateTv, windTv, city_name_Tv;
+    private ImageView weatherImg, pmImg;
     //private Handler mHandler = new Handler() {
         /*public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
@@ -66,7 +66,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
             Log.d("myWeather", "网络挂了");
             Toast.makeText(MainActivity.this, "网络挂了!", Toast.LENGTH_LONG).show();
         }
-        //initView();
+        initView();
     }
     private void parseXML(String xmldata){
         try{
@@ -102,7 +102,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
             e.printStackTrace();
         }
     }
-    /*void initView(){
+    void initView(){
         city_name_Tv = (TextView) findViewById(R.id.title_city_name);
         cityTv = (TextView) findViewById(R.id.city);
         timeTv = (TextView) findViewById(R.id.time);
@@ -127,7 +127,6 @@ public class MainActivity extends Activity implements View.OnClickListener{
         climateTv.setText("N/A");
         windTv.setText("N/A");
     }
-*/
     @Override
     public void onClick(View view){
 
