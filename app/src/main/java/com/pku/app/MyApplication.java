@@ -19,26 +19,28 @@ import java.util.List;
  * Created by Tammy on 2017/11/1.
  */
 
-public class MyApplication extends Application{
-    private static final String TAG = "MyAPP";
-
+public class MyApplication extends Application {
+    private static final String TAG="MyAPP";
     private static MyApplication mApplication;
     private CityDB mCityDB;
     private List<City> mCityList;
+
     @Override
     public void onCreate(){
         super.onCreate();
         Log.d(TAG,"MyApplication->Oncreate");
         mApplication = this;
-        mCityDB = openCityDB();
+        mCityDB=openCityDB();
         initCityList();
+
     }
+
     private void initCityList(){
         mCityList = new ArrayList<City>();
         new Thread(new Runnable() {
             @Override
             public void run() {
-                 // TODO Auto-generated method stub
+                // TODO Auto-generated method stub
                 prepareCityList();
             }
         }).start();
@@ -58,6 +60,10 @@ public class MyApplication extends Application{
     public List<City> getCityList() {
         return mCityList;
     }
+    public static MyApplication getInstance(){
+        return mApplication;
+    }
+
     private CityDB openCityDB() {
         String path = "/data"
                 + Environment.getDataDirectory().getAbsolutePath()
@@ -97,7 +103,5 @@ public class MyApplication extends Application{
         }
         return new CityDB(this, path);
     }
-    public static MyApplication getInstance(){
-        return mApplication;
-    }
+
 }

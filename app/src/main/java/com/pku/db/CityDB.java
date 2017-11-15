@@ -37,4 +37,3 @@ public class CityDB {
         return list;
     }
 }
-
