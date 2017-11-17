@@ -12,6 +12,9 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -44,10 +47,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private TextView cityTv, timeTv, humidityTv, weekTv, pmDataTv, pmQualityTv, temperatureTv, climateTv, windTv, city_name_Tv;
 
     private ImageView weatherImg, pmImg;
-
-
-
-
+    //更新图标旋转
+    Animation operatingAnim = null;
+    //LinearInterpolator为匀速效果
+    LinearInterpolator lin = null;
 
     private Handler mHandler = new Handler() {
         public void handleMessage(android.os.Message msg) {
@@ -173,6 +176,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private void queryWeatherCode(String cityCode) {   //通过城市ID请求天气数据
         final String address = "http://wthrcdn.etouch.cn/WeatherApi?citykey=" + cityCode;
         Log.d("myWeather", address);
+        //更新按钮旋转
+        operatingAnim = AnimationUtils.loadAnimation(MainActivity.this, R.anim.title_update_anim);
+        lin = new LinearInterpolator(); //LinearInterpolator为匀速效果
+        operatingAnim.setInterpolator(lin);//设置旋转效果
+        //开始旋转
+        if (operatingAnim != null) {
+            mUpdateBtn.startAnimation(operatingAnim);
+            Log.d("start anim","旋转啦");
+        }
+
         new Thread(new Runnable() {
             @Override
             public void run() {
