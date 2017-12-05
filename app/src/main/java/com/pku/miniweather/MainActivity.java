@@ -8,22 +8,22 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.view.ViewPager;
+//import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.LayoutInflater;
+//import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
-import android.widget.AdapterView;
+//import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.ListView;
+//import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pku.Util.NetUtil;
-import com.pku.app.MyApplication;
-import com.pku.bean.City;
+//import com.pku.app.MyApplication;
+//import com.pku.bean.City;
 import com.pku.bean.TodayWeather;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -37,7 +37,7 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 public class MainActivity extends Activity implements View.OnClickListener {
     private static final int UPDATE_TODAY_WEATHER = 1;
@@ -77,11 +77,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.weather_info);  //把布局设置在主界面上
+        super.onCreate(savedInstanceState);//调用父类方法
+        setContentView(R.layout.weather_info);  //加载R.layout.weather_info的布局文件，把布局设置在主界面上
+         //要在AndroidManifest文件中注册，不然会报错
 
-
-        mUpdateBtn = (ImageView) findViewById(R.id.title_update_btn);   //跟新的按钮图片来源
+        mUpdateBtn = (ImageView) findViewById(R.id.title_update_btn);   //更新的按钮图片来源
         mUpdateBtn.setOnClickListener(this);     //这个更新图标可以点击，设置监听器
         if (NetUtil.getNetworkState(this) != NetUtil.NETWORN_NONE) {      //检查网络连接状况
             Log.d("myWeather", "网络OK");
@@ -114,7 +114,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         climateTv = (TextView) findViewById(R.id.climate);
         windTv = (TextView) findViewById(R.id.wind);
         weatherImg = (ImageView) findViewById(R.id.weather_img);
-        city_name_Tv.setText("N/A");
+        city_name_Tv.setText("N/A");//文本设置为
         cityTv.setText("N/A");
         timeTv.setText("N/A");
         humidityTv.setText("N/A");

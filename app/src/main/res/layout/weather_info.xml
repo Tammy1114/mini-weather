@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--定义一个线性布局，并定义了我们需要的架构，有了它就可以按alt+/ 作为提示，提示你输入什么，不该输入什么-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
