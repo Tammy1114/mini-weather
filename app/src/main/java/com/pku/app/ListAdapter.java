@@ -15,12 +15,12 @@ import com.pku.miniweather.R;
  * Created by Tammy on 2017/11/15.
  */
 
-public class EditTextListViewAdapter  extends BaseAdapter {
+public class ListAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private List<City> data;
 
     //构造函数
-    public EditTextListViewAdapter(Context context, List<City> data) {
+    public ListAdapter(Context context, List<City> data) {
         this.inflater = LayoutInflater.from(context);
         this.data = data;
     }

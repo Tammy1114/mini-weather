@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.pku.app.MyApplication;
 import com.pku.bean.City;
-import com.pku.app.EditTextListViewAdapter;
+import com.pku.app.ListAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,15 +32,11 @@ public class SelectCity extends Activity implements View.OnClickListener{
     private ImageView mBackBtn;
     private MyApplication mApplication;
 
-    //private String SelectedId;
-    //private TextView selectcity;
-    //private List<City> data;
-    //ArrayList<String> city = new ArrayList<String>();
-    //ArrayList<String> cityId = new ArrayList<String>();
+
 
     private List<City> cList;
     private List<City> newlist = new ArrayList<City>(); //显示搜索后的数据
-    private EditTextListViewAdapter adapter;
+    private ListAdapter adapter;
     private TextView currentCityNameTv;
     private EditText mEditText;
     private String cityName="北京";
@@ -57,42 +53,7 @@ public class SelectCity extends Activity implements View.OnClickListener{
             currentCityName = "";
         }
         currentCityNameTv.setText(getResources().getString(R.string.current_city_name)+currentCityName);
-        /*
-        mBackBtn=(ImageView)findViewById(R.id.title_back);
-        mBackBtn.setOnClickListener(this);
-        mApplication = (MyApplication)getApplication();
-        data=mApplication.getCityList();
-        int i = 0;
-        while (i<data.size())
-        {
-            city.add(data.get(i).getCity().toString());
-            cityId.add(data.get(i++).getNumber().toString());
-        }
-        //得到listview控件
-        listView = (ListView)findViewById(R.id.city_list);
-        //构建适配器Adapter,将数据与显示数据的布局页面绑定； 将ArrayAdapter构造方法的最后一个参数改成city，系统就会加载List对象的数据
-        ArrayAdapter<String> adapter=new ArrayAdapter<String>(SelectCity.this,android.R.layout.simple_list_item_1,city);
-        //通过setAdapter()方法把适配器设置给ListView
-        listView.setAdapter(adapter);
 
-        //cityName = (TextView) findViewById(R.id.title_city_name);
-        //selectcity = (TextView)findViewById(R.id.title_name);
-        //注册点击事件
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(SelectCity.this, "你单击了:"+city.get(i), Toast.LENGTH_SHORT).show();
-                SelectedId = cityId.get(i);
-                selectcity.setText("选择城市："+city.get(i));
-            }
-        });
-        */
-        /**
-         * @param parent 当前ListView
-         * @param view 代表当前被点击的条目
-         * @param position 当前条目的位置
-         * @param id 当前被点击的条目的id
-         */
         listCity.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent,View view,int position,long id){
@@ -184,7 +145,7 @@ public class SelectCity extends Activity implements View.OnClickListener{
         cList =  mApplication.getCityList(); //获取城市列表！！！
         Log.d("size...:", cList.size()+"");
         //创建adapter对象
-        adapter = new EditTextListViewAdapter(this, cList);
+        adapter = new ListAdapter(this, cList);
         //为ListView设置Adapter来绑定数据
         listCity.setAdapter(adapter);
 
@@ -241,29 +202,15 @@ public class SelectCity extends Activity implements View.OnClickListener{
     }
 
     TextWatcher mTextWatcher = new TextWatcher() {
-        /**
-         * ==========文字变化前=========
-         *
-         * @param s     改变之前的内容
-         * @param start 开始的位置
-         * @param count 被改变的旧内容数
-         * @param after 改变后的内容数量
-         */
+
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         }
 
-        /**
-         * ==========文字变化时=========
-         *
-         * @param s      改变之后的内容
-         * @param start
-         * @param before 被改变的内容的数量
-         * @param count
-         */
+
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            //必须得加上这句！！！
+
             newlist.clear();
             if (mEditText.getText() != null) {
                 String input_info = mEditText.getText().toString();  //获取 “编辑框” 的内容
@@ -271,7 +218,7 @@ public class SelectCity extends Activity implements View.OnClickListener{
                 //根据编辑框的内容，getNewData()获取新的newlist
                 newlist = getNewData(input_info);
                 //重新绑定adapter
-                adapter = new EditTextListViewAdapter(SelectCity.this, newlist);
+                adapter = new ListAdapter(SelectCity.this, newlist);
                 listCity.setAdapter(adapter);
             }
         }
@@ -289,6 +236,3 @@ public class SelectCity extends Activity implements View.OnClickListener{
         }
     }
 }
-
-
-
