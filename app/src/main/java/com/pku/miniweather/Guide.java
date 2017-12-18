@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Tammy on 2017/12/14.
+ * Created by Tammy on 2017/12/15.
  */
 
 public class Guide extends Activity implements ViewPager.OnPageChangeListener {
@@ -28,35 +29,32 @@ public class Guide extends Activity implements ViewPager.OnPageChangeListener {
     private Button btn;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) //在Activity中，通过setContView绑定布局
-    {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final SharedPreferences first = (SharedPreferences)getSharedPreferences("first",MODE_PRIVATE);
-        Boolean isFirst = first.getBoolean("isFirst",true) ;
-        if(isFirst) {
-            setContentView(R.layout.guide) ;
+        final SharedPreferences first = (SharedPreferences) getSharedPreferences("first", MODE_PRIVATE);
+        Boolean isFirst = first.getBoolean("isFirst", true);
+        if (isFirst) {
+            setContentView(R.layout.guide);
             initViews();
             initDots();
-            btn =(Button)views.get(2).findViewById(R.id.guide_btn) ;
-            btn.setOnClickListener(new View.OnClickListener( ) {
+            btn = (Button) views.get(2).findViewById(R.id.guide_btn);
+            btn.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick( View v) {
+                public void onClick(View v) {
                     SharedPreferences.Editor editor = first.edit();
                     editor.putBoolean("isFirst", false);
-                    editor.commit( ) ;
-                    Intent intent = new Intent( Guide. this, MainActivity. class) ;
-                    startActivity(intent) ;
-                    finish() ;
+                    editor.commit();
+                    Intent intent = new Intent(Guide.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
             });
-        }
-        else{
-            Intent intent = new Intent(Guide.this,MainActivity.class);
+        } else {
+            Intent intent = new Intent(Guide.this, MainActivity.class);
             startActivity(intent);
             finish();
         }
     }
-
     void initDots() //定义一个方法，将3个小圆点控件对象，存放dots数组中
     {
         dots = new ImageView[views.size()];
@@ -65,7 +63,6 @@ public class Guide extends Activity implements ViewPager.OnPageChangeListener {
             dots[i]=(ImageView) findViewById(ids[i]);
         }
     }
-
     private void initViews()  //initViews主要用于动态的加载要在ViewPager中显示的视图
     {
         LayoutInflater inflater =LayoutInflater.from(this);   //首先，获取LayoutInflater对象
